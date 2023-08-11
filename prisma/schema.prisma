@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int          @id @default(autoincrement())
+  name       String
+  phone      String
+  email      String       @unique
+  password   String
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+  user_type  UserType
+  contribute Contribute[]
+  // realtor_messages Message[] @relation("realtor_messages")
+  // buyer_messages   Message[] @relation("buyer_messages")
+}
+
+model Contribute {
+  id                  Int          @id @default(autoincrement())
+  address             String
+  number_of_bedrooms  Int
+  number_of_bathrooms Float
+  city                String
+  listed_date         DateTime     @default(now())
+  price               Int
+  land_size           Float
+  propertyType        PropertyType
+  created_at          DateTime     @default(now())
+  updated_at          DateTime     @updatedAt
+  // images              Image[]
+  // messages            Message[]
+  contributor_id      Int
+  contributor         User         @relation(fields: [contributor_id], references: [id])
+}
+
+enum PropertyType {
+  // カレンダーの予定のジャンル分け
+  RESIDENTIALS
+  CONDO
+}
+
+enum UserType {
+  BUYER
+  REALTOR
+  ADMIN
+}
