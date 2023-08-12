@@ -37,9 +37,20 @@ model Contribute {
   created_at          DateTime     @default(now())
   updated_at          DateTime     @updatedAt
   // images              Image[]
-  // messages            Message[]
+  messages            Naisei[]
   contributor_id      Int
   contributor         User         @relation(fields: [contributor_id], references: [id])
+}
+
+model Naisei {
+  id            Int        @id @default(autoincrement())
+  message       String
+  contribute_id Int
+  contribute    Contribute @relation(fields: [contribute_id], references: [id])
+  realtor_id    Int
+  // realtor    User   @relation("realtor_messages", fields: [realtor_id], references: [id])
+  // buyer_id   Int
+  // buyer      User   @relation("buyer_messages", fields: [buyer_id], references: [id])
 }
 
 enum PropertyType {
@@ -49,6 +60,7 @@ enum PropertyType {
 }
 
 enum UserType {
+  CONTRIBUTOR
   BUYER
   REALTOR
   ADMIN
