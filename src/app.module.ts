@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ContributesController } from './contributes/contributes.controller';
-import { ContributesService } from './contributes/contributes.service';
-import { ContributesModule } from './contributes/contributes.module';
 import { UserModule } from './user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { NaiseiController } from './naisei/naisei.controller';
+import { NaiseiService } from './naisei/naisei.service';
+import { NaiseiModule } from './naisei/naisei.module';
+
 
 @Module({
-  imports: [ContributesModule, UserModule, PrismaModule],
-  controllers: [AppController, ContributesController],
-  providers: [AppService, ContributesService],
+  imports: [UserModule, PrismaModule, NaiseiModule],
+  controllers: [AppController, NaiseiController],
+  providers: [AppService, NaiseiService],
 })
-export class AppModule {}
+export class AppModule { }
