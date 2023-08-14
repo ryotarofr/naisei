@@ -72,3 +72,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](LICENSE).
 # naisei
+dtoに型つけないとエラー500でる
+export class CreateNaiseiDto {
+  @IsString()
+  naisei: string
+
+  // @IsEnum(EvaluationType)
+  // evaluation_type: EvaluationType
+}

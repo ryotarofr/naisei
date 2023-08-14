@@ -27,6 +27,15 @@ model User {
 model Naisei {
   id     Int    @id @default(autoincrement())
   naisei String
+  // evaluation_type EvaluationType
+}
+
+enum EvaluationType {
+  A
+  B
+  C
+  D
+  E
 }
 
 enum PlanType {
