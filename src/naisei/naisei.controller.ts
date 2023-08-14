@@ -18,9 +18,9 @@ export class NaiseiController {
 
   @Post()
   createNaisei(
-    @Body() { naisei }: CreateNaiseiDto
+    @Body() { naisei, evaluation_type }: CreateNaiseiDto
   ) {
-    return this.naiseiService.createNaisei({ naisei })
+    return this.naiseiService.createNaisei({ naisei, evaluation_type })
   }
 
 

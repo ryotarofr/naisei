@@ -1,9 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateNaiseiDto } from './dto/update-naisei.dto';
+import { EvaluationType } from '@prisma/client';
 
 interface CreateNaiseiParams {
   naisei: string
+  evaluation_type: EvaluationType
 }
 
 @Injectable()
@@ -29,12 +31,12 @@ export class NaiseiService {
     return found
   }
 
-  async createNaisei({ naisei }: CreateNaiseiParams) {
+  async createNaisei({ naisei, evaluation_type }: CreateNaiseiParams) {
     const createNaisei = await this.prismaService.naisei.create({
-      data: { naisei }
+      data: { naisei, evaluation_type }
     })
 
-    return createNaisei.naisei
+    return createNaisei
   }
 
   updateNaisei(id: number, updateNaiseiDto: UpdateNaiseiDto) {
